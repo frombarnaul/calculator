@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp27
 {
@@ -12,6 +6,7 @@ namespace ConsoleApp27
     {
         public double answer;
     }
+
     class Calculator
     {
         public event EventHandler<CalculatorEventArgs> Result;
@@ -83,11 +78,21 @@ namespace ConsoleApp27
             StartEvent();
         }
 
+        public void Add(int value)
+        {
+            Add((double)value);
+        }
+
         public void Sub(double value)
         {
             results.Push(result);
             result -= value;
             StartEvent();
+        }
+
+        public void Sub(int value)
+        {
+            Sub((double)value);
         }
 
         public void Mul(double value)
@@ -97,11 +102,26 @@ namespace ConsoleApp27
             StartEvent();
         }
 
+        public void Mul(int value)
+        {
+            Mul((double)value);
+        }
+
         public void Div(double value)
         {
+            if (value == 0)
+            {
+                Console.WriteLine("Деление на ноль недопустимо");
+                return;
+            }
             results.Push(result);
             result /= value;
             StartEvent();
+        }
+
+        public void Div(int value)
+        {
+            Div((double)value);
         }
 
         public void Cancel()
